@@ -42,8 +42,8 @@ export class Product extends BaseEntity {
   @Column({ type: 'int', nullable: true, name: 'ventas' })
   Ventas: number;
 
-  @Column({ type: 'boolean', nullable: true, name: 'iva_producto' })
-  IvaProducto: boolean;
+  @Column({ type: 'varchar', length: 1, nullable: true, name: 'iva_producto' })
+  IvaProducto: string;
 
   @Column({
     type: 'timestamp',
@@ -51,10 +51,4 @@ export class Product extends BaseEntity {
     name: 'fecha',
   })
   Fecha: Date;
-
-  //   @Column({
-  //     type: 'timestamp',
-  //     nullable: true,
-  //   })
-  //   Fecha: string;
 }
