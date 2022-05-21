@@ -1,6 +1,16 @@
-import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
+import { CreateProductDto } from './dto/create-product.dto';
 import { ReadProductDto } from './dto/read-product.dto';
-import { Product } from './product.entity';
 import { ProductService } from './product.service';
 
 @Controller('product')
@@ -22,5 +32,17 @@ export class ProductController {
   async getAll(): Promise<ReadProductDto[]> {
     const products: ReadProductDto[] = await this._productService.getAll();
     return products;
+  }
+
+  @Post()
+  @UsePipes(new ValidationPipe({ transform: true }))
+  async create(@Body() product: CreateProductDto) {
+    const data = await this._productService.create(product);
+
+    return {
+      status: HttpStatus.CREATED,
+      data,
+      message: `Producto creado correctamente`,
+    };
   }
 }

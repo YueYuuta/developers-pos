@@ -19,7 +19,7 @@ export class Product extends BaseEntity {
     eager: true,
   })
   @JoinColumn({ name: 'id_categoria' })
-  category: number;
+  Category: number;
 
   @Column({ type: 'text', nullable: false, name: 'codigo' })
   Codigo: string;
@@ -30,19 +30,19 @@ export class Product extends BaseEntity {
   @Column({ type: 'text', nullable: true, name: 'imagen' })
   Imagen: string;
 
-  @Column({ type: 'float', nullable: true, name: 'precio_compra' })
+  @Column({ type: 'float', nullable: false, name: 'precio_compra' })
   PrecioCompra: number;
 
-  @Column({ type: 'float', nullable: true, name: 'precio_siniva' })
+  @Column({ type: 'float', nullable: false, name: 'precio_siniva' })
   PrecioSinIva: number;
 
-  @Column({ type: 'float', nullable: true, name: 'precio_venta' })
+  @Column({ type: 'float', nullable: false, name: 'precio_venta' })
   PrecioVenta: number;
 
-  @Column({ type: 'int', nullable: true, name: 'ventas' })
+  @Column({ type: 'int', nullable: true, name: 'ventas', default: 0 })
   Ventas: number;
 
-  @Column({ type: 'varchar', length: 1, nullable: true, name: 'iva_producto' })
+  @Column({ type: 'varchar', length: 1, nullable: false, name: 'iva_producto' })
   IvaProducto: string;
 
   @Column({

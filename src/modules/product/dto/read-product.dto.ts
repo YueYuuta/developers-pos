@@ -7,7 +7,7 @@ export class ReadProductDto {
   readonly ProductID: number;
   @Expose()
   @Type(type => ReadCategoryDto)
-  readonly category: ReadCategoryDto;
+  readonly Category: ReadCategoryDto;
   @Expose()
   readonly Codigo: string;
   @Expose()
