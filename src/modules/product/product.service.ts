@@ -27,16 +27,31 @@ export class ProductService {
     }
   }
 
-  async getAll(): Promise<ReadProductDto[]> {
+  async getAll(desde: number, limite): Promise<any[]> {
     try {
-      const products: Product[] = await this._productRepository.find();
-      return products.map((product: Product) =>
+      const products = await this._productRepository.findAndCount({
+        skip: desde,
+        take: limite,
+      });
+      // const products: Product[] = await this._productRepository.find();
+      return products.map((product: any) =>
         plainToClass(ReadProductDto, product),
       );
     } catch (err) {
       throw new InternalServerErrorException(err);
     }
   }
+
+  // async getAll(): Promise<ReadProductDto[]> {
+  //   try {
+  //     const products: Product[] = await this._productRepository.find();
+  //     return products.map((product: any) =>
+  //       plainToClass(ReadProductDto, product),
+  //     );
+  //   } catch (err) {
+  //     throw new InternalServerErrorException(err);
+  //   }
+  // }
 
   async create(productoCreate: CreateProductDto): Promise<Product> {
     //:Todo

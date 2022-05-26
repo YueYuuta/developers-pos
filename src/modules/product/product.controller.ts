@@ -28,9 +28,15 @@ export class ProductController {
     return product;
   }
 
-  @Get()
-  async getAll(): Promise<ReadProductDto[]> {
-    const products: ReadProductDto[] = await this._productService.getAll();
+  @Get(':desde/:hasta')
+  async getAll(
+    @Param('desde', ParseIntPipe) desde: number,
+    @Param('hasta', ParseIntPipe) hasta: number,
+  ): Promise<ReadProductDto[]> {
+    const products: ReadProductDto[] = await this._productService.getAll(
+      desde,
+      hasta,
+    );
     return products;
   }
 
